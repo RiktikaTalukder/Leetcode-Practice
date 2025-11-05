@@ -1,0 +1,51 @@
+#Python — HashSet (Optimal)
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()  # stores unique values
+
+        for num in nums:
+            if num in seen:  # duplicate found
+                return True
+            seen.add(num)  # mark number as seen
+
+        return False  # no duplicates
+
+
+
+#Python — Dictionary Variant
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Note: Using dict as a set alternative (keys track seen elements)
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = {}  # store seen values as keys
+
+        for num in nums:
+            if num in seen:  # duplicate found
+                return True
+            seen[num] = True  # store in map
+
+        return False
+
+
+#C++ — Sorting Method (Alternative Approach)
+// Time Complexity: O(n log n) due to sorting
+// Space Complexity: O(1) (in-place sort)
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());  // sort to check adjacent elements
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (nums[i] == nums[i + 1])  // adjacent duplicate found
+                return true;
+        }
+
+        return false;  // no duplicates
+    }
+};
