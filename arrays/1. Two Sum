@@ -1,0 +1,53 @@
+/*
+Solution: Brute-force check every pair
+Time: O(n²), Space: O(1)
+
+C++ solution
+*/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+
+        // Loop through each number
+        for(int i = 0; i < nums.size(); i++) {
+            // Check for a pair after index i
+            for(int j = i + 1; j < nums.size(); j++) {
+                
+                // If pair sums to target, return indices
+                if(nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        
+        // No valid pair found
+        return {};  
+    }
+};
+
+
+/*
+LeetCode 1. Two Sum
+Approach: Hash map to store seen numbers
+Time: O(n), Space: O(n)
+
+Python solution
+
+*/
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        prevMap = {}  # value -> index
+
+        for i, n in enumerate(nums):
+            diff = target - n
+            
+            # If complement exists in map, we found the pair
+            if diff in prevMap:
+                return [prevMap[diff], i]
+            
+            # Store current value and index
+            prevMap[n] = i
+        
+        # No pair found (the problem guarantees one)
+        return
