@@ -1,0 +1,93 @@
+---------------------------------------------------------
+  1. ROTATE USING EXTRA ARRAY (SAFE & SIMPLE)
+     Time:  O(n)
+     Space: O(n)
+     Idea:
+        - Keep a copy of the original array
+        - Place each element at its rotated position
+---------------------------------------------------------
+*/
+class SolutionExtraArray {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k %= n;                  // Reduce k to effective rotation
+        vector<int> original(nums);  // Copy original values
+
+        // Position each element to its new index
+        for (int i = 0; i < n; i++) {
+            nums[(i + k) % n] = original[i];
+        }
+    }
+};
+
+
+/*
+---------------------------------------------------------
+  2. ROTATE USING IN-PLACE REVERSE (OPTIMAL)
+     Time:  O(n)
+     Space: O(1)
+     Idea:
+        - Reverse the whole array
+        - Reverse first k elements
+        - Reverse remaining n-k elements
+        This achieves rotation without extra memory.
+---------------------------------------------------------
+*/
+class SolutionReverse {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        if (n == 0) return;
+
+        k %= n;  // Effective rotation
+
+        // Reverse whole array
+        reverse(nums.begin(), nums.end());
+
+        // Reverse first k elements
+        reverse(nums.begin(), nums.begin() + k);
+
+        // Reverse remaining part
+        reverse(nums.begin() + k, nums.end());
+    }
+};
+
+
+/*
+---------------------------------------------------------
+  3. PYTHON VERSION (IN-PLACE REVERSE)
+     Equivalent to the C++ reverse approach.
+---------------------------------------------------------
+*/
+
+"""
+Python Rotate Array — In-Place Reverse Method
+
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        n = len(nums)
+        k %= n
+
+        # Reverse whole array
+        l, r = 0, n - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
+
+        # Reverse first k elements
+        l, r = 0, k - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
+
+        # Reverse remaining elements
+        l, r = k, n - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
+"""
+
