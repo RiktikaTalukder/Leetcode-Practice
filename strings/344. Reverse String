@@ -1,0 +1,57 @@
+# ---------------------------------------------------------
+# Method 1: Two-Pointer Approach (Most Optimal)
+# ---------------------------------------------------------
+
+class SolutionTwoPointer:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Reverse the string in-place using the two-pointer technique.
+        Time: O(n), Space: O(1)
+        """
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l, r = l + 1, r - 1
+
+
+# ---------------------------------------------------------
+# Method 2: Stack-Based Approach
+# ---------------------------------------------------------
+
+class SolutionStack:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Reverse the string using a stack (LIFO).
+        Time: O(n), Space: O(n)
+        """
+        stack = []
+
+        # Push all characters to stack
+        for c in s:
+            stack.append(c)
+
+        # Pop them back to s
+        i = 0
+        while stack:
+            s[i] = stack.pop()
+            i += 1
+
+
+# ---------------------------------------------------------
+# Method 3: Recursive Approach
+# ---------------------------------------------------------
+
+class SolutionRecursive:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Reverse the string using recursion.
+        Time: O(n), Space: O(n) due to recursion stack.
+        """
+
+        def reverse(l, r):
+            if l < r:
+                s[l], s[r] = s[r], s[l]
+                reverse(l + 1, r - 1)
+
+        reverse(0, len(s) - 1)
