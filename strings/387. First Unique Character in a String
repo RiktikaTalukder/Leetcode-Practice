@@ -1,0 +1,21 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        """
+        Return the index of the first non-repeating character in the string.
+        If none exists, return -1.
+
+        Time Complexity: O(n)
+        Space Complexity: O(1)  # because the character set is fixed (26 letters)
+        """
+        freq = {}
+
+        # Count frequency of each character
+        for ch in s:
+            freq[ch] = freq.get(ch, 0) + 1
+
+        # Find the first character with frequency 1
+        for idx, ch in enumerate(s):
+            if freq[ch] == 1:
+                return idx
+
+        return -1
