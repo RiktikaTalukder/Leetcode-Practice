@@ -1,0 +1,25 @@
+#Sorting:
+#Time complexity: O(nlogn)
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        n = len(nums)
+        nums.sort()
+
+        return nums[n//2]
+
+
+#Randomization:
+#Time complexity: O(n)
+import random
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        n = len(nums)
+        while True:
+            candidate = random.choice(nums)
+            if nums.count(candidate) > n//2:
+                return candidate
+
+
+
+        
+        
